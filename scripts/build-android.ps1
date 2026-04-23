@@ -277,6 +277,8 @@ Log-Step 'Syncing Capacitor Android project...'
 npx cap sync android
 Log-Ok 'Sync complete.'
 
+Ensure-Jdk | Out-Null
+
 Ensure-Keystore
 
 $gradleInfo = Get-GradleFile
