@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://musclefactory.com/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/shop</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/shop" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/shop?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/shop?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/shop" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/build-pack</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/build-pack" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/build-pack?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/build-pack?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/build-pack" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tools</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tools" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tools?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tools?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tools" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/wishlist</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/wishlist" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/wishlist?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/wishlist?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/wishlist" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/my-programs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/my-programs" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/my-programs?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/my-programs?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/my-programs" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/premium-whey-protein-isolate</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/premium-whey-protein-isolate" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/premium-whey-protein-isolate?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/premium-whey-protein-isolate?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/premium-whey-protein-isolate" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/extreme-pre-workout-formula</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/extreme-pre-workout-formula" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/extreme-pre-workout-formula?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/extreme-pre-workout-formula?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/extreme-pre-workout-formula" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/pure-creatine-monohydrate</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/pure-creatine-monohydrate" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/pure-creatine-monohydrate?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/pure-creatine-monohydrate?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/pure-creatine-monohydrate" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/bcaa-recovery-complex</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/bcaa-recovery-complex" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/bcaa-recovery-complex?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/bcaa-recovery-complex?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/bcaa-recovery-complex" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/testosterone-booster-elite</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/testosterone-booster-elite" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/testosterone-booster-elite?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/testosterone-booster-elite?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/testosterone-booster-elite" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/thermogenic-fat-burner</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/thermogenic-fat-burner" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/thermogenic-fat-burner?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/thermogenic-fat-burner?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/thermogenic-fat-burner" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/complete-multivitamin-complex</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/complete-multivitamin-complex" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/complete-multivitamin-complex?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/complete-multivitamin-complex?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/complete-multivitamin-complex" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/omega-3-fish-oil-ultra</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/omega-3-fish-oil-ultra" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/omega-3-fish-oil-ultra?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/omega-3-fish-oil-ultra?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/omega-3-fish-oil-ultra" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/mass-gainer-pro-3000</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/mass-gainer-pro-3000" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/mass-gainer-pro-3000?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/mass-gainer-pro-3000?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/mass-gainer-pro-3000" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/l-glutamine-powder</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/l-glutamine-powder" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/l-glutamine-powder?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/l-glutamine-powder?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/l-glutamine-powder" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/zma-night-recovery</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/zma-night-recovery" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/zma-night-recovery?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/zma-night-recovery?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/zma-night-recovery" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/product/slow-release-casein-protein</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/product/slow-release-casein-protein" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/product/slow-release-casein-protein?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/product/slow-release-casein-protein?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/product/slow-release-casein-protein" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/ppl</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/ppl" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/ppl?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/ppl?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/ppl" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/fullbody</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/fullbody" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/fullbody?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/fullbody?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/fullbody" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/upperlower</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/upperlower" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/upperlower?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/upperlower?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/upperlower" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/brosplit</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/brosplit" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/brosplit?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/brosplit?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/brosplit" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/hiit</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/hiit" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/hiit?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/hiit?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/hiit" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/strength</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/strength" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/strength?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/strength?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/strength" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/beginner</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/beginner" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/beginner?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/beginner?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/beginner" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/home</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/home" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/home?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/home?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/home" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/gvt</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/gvt" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/gvt?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/gvt?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/gvt" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/531</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/531" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/531?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/531?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/531" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/yoga</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/yoga" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/yoga?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/yoga?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/yoga" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/sprint</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/sprint" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/sprint?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/sprint?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/sprint" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/calisthenics</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/calisthenics" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/calisthenics?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/calisthenics?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/calisthenics" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/athleanx</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/athleanx" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/athleanx?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/athleanx?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/athleanx" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/crossfit</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/crossfit" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/crossfit?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/crossfit?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/crossfit" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/mobility</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/mobility" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/mobility?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/mobility?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/mobility" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/mma</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/mma" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/mma?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/mma?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/mma" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/classic</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/classic" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/classic?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/classic?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/classic" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/ramadan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/ramadan" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/ramadan?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/ramadan?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/ramadan" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/workouts/women</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/workouts/women" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/workouts/women?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/workouts/women?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/workouts/women" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/ultimate-guide-creatine</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/ultimate-guide-creatine" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/ultimate-guide-creatine?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/ultimate-guide-creatine?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/ultimate-guide-creatine" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/understanding-anabolic-steroids</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/understanding-anabolic-steroids" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/understanding-anabolic-steroids?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/understanding-anabolic-steroids?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/understanding-anabolic-steroids" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/top-compound-exercises-muscle-growth</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/top-compound-exercises-muscle-growth" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/top-compound-exercises-muscle-growth?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/top-compound-exercises-muscle-growth?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/top-compound-exercises-muscle-growth" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/pct-post-cycle-therapy-guide</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/pct-post-cycle-therapy-guide" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/pct-post-cycle-therapy-guide?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/pct-post-cycle-therapy-guide?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/pct-post-cycle-therapy-guide" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/protein-timing-does-it-matter</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/protein-timing-does-it-matter" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/protein-timing-does-it-matter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/protein-timing-does-it-matter?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/protein-timing-does-it-matter" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/essential-gym-tools-2026</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/essential-gym-tools-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/essential-gym-tools-2026?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/essential-gym-tools-2026?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/essential-gym-tools-2026" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/trt-testosterone-replacement-therapy</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/trt-testosterone-replacement-therapy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/trt-testosterone-replacement-therapy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/trt-testosterone-replacement-therapy?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/trt-testosterone-replacement-therapy" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/whey-vs-casein-vs-plant-protein</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/whey-vs-casein-vs-plant-protein" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/whey-vs-casein-vs-plant-protein?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/whey-vs-casein-vs-plant-protein?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/whey-vs-casein-vs-plant-protein" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/bulking-vs-cutting-nutrition</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/bulking-vs-cutting-nutrition" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/bulking-vs-cutting-nutrition?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/bulking-vs-cutting-nutrition?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/bulking-vs-cutting-nutrition" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/sarms-vs-steroids-comparison</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/sarms-vs-steroids-comparison" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/sarms-vs-steroids-comparison?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/sarms-vs-steroids-comparison?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/sarms-vs-steroids-comparison" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/sleep-muscle-recovery-science</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/sleep-muscle-recovery-science" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/sleep-muscle-recovery-science?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/sleep-muscle-recovery-science?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/sleep-muscle-recovery-science" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/beginners-guide-supplement-stacking</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/beginners-guide-supplement-stacking" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/beginners-guide-supplement-stacking?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/beginners-guide-supplement-stacking?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/beginners-guide-supplement-stacking" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/hgh-growth-hormone-explained</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/hgh-growth-hormone-explained" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/hgh-growth-hormone-explained?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/hgh-growth-hormone-explained?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/hgh-growth-hormone-explained" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/meal-prep-bodybuilders-weekly</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/meal-prep-bodybuilders-weekly" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/meal-prep-bodybuilders-weekly?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/meal-prep-bodybuilders-weekly?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/meal-prep-bodybuilders-weekly" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/home-gym-equipment-guide</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/home-gym-equipment-guide" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/home-gym-equipment-guide?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/home-gym-equipment-guide?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/home-gym-equipment-guide" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/guide-complet-pre-workout</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/guide-complet-pre-workout" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/guide-complet-pre-workout?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/guide-complet-pre-workout?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/guide-complet-pre-workout" />
+  </url>
+  <url>
+    <loc>https://musclefactory.com/tips/jeune-intermittent-musculation</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://musclefactory.com/tips/jeune-intermittent-musculation" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://musclefactory.com/tips/jeune-intermittent-musculation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://musclefactory.com/tips/jeune-intermittent-musculation?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://musclefactory.com/tips/jeune-intermittent-musculation" />
+  </url>
+</urlset>
