@@ -31,9 +31,10 @@ const HeroSection = () => {
         width={1280}
         height={1600}
         fetchPriority="high"
-        className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-[1400ms] ease-out ${
+        className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity ease-out ${
           loaded ? "opacity-100" : "opacity-0"
         }`}
+        style={{ transitionDuration: "1400ms" }}
       />
 
       {/* Editorial gradient: deep at bottom for type legibility, soft top */}
@@ -89,18 +90,20 @@ const HeroSection = () => {
 
           {/* Description */}
           <p
-            className={`mt-6 text-[15px] sm:text-base lg:text-lg text-foreground/70 max-w-xl leading-[1.65] transition-all duration-700 delay-[600ms] ${
+            className={`mt-6 text-[15px] sm:text-base lg:text-lg text-foreground/70 max-w-xl leading-[1.65] transition-all duration-700 ${
               loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
+            style={{ transitionDelay: "600ms" }}
           >
             {t("hero.description")}
           </p>
 
           {/* CTAs — refined, less candy */}
           <div
-            className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mt-8 sm:mt-10 transition-all duration-700 delay-[750ms] ${
+            className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mt-8 sm:mt-10 transition-all duration-700 ${
               loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
+            style={{ transitionDelay: "750ms" }}
           >
             <Link
               to="/shop"
@@ -121,9 +124,10 @@ const HeroSection = () => {
 
           {/* Stats — editorial table style */}
           <div
-            className={`mt-12 sm:mt-16 grid grid-cols-3 gap-px bg-foreground/10 max-w-2xl border-y border-foreground/10 transition-all duration-700 delay-[900ms] ${
+            className={`mt-12 sm:mt-16 grid grid-cols-3 gap-px bg-foreground/10 max-w-2xl border-y border-foreground/10 transition-all duration-700 ${
               loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
+            style={{ transitionDelay: "900ms" }}
           >
             {stats.map((s) => (
               <div key={s.key} className="bg-background/40 backdrop-blur-sm py-4 sm:py-5 px-3 sm:px-5">
@@ -142,9 +146,10 @@ const HeroSection = () => {
 
       {/* ─── Bottom signature line ─────────────────────────────────── */}
       <div
-        className={`relative z-10 hidden md:flex items-center justify-between gap-6 px-5 sm:px-8 lg:px-16 pb-6 transition-opacity duration-1000 delay-[1100ms] ${
+        className={`relative z-10 hidden md:flex items-center justify-between gap-6 px-5 sm:px-8 lg:px-16 pb-6 transition-opacity duration-1000 ${
           loaded ? "opacity-60" : "opacity-0"
         }`}
+        style={{ transitionDelay: "1100ms" }}
       >
         <span className="font-condensed text-[10px] uppercase tracking-[0.32em] text-foreground/60">
           {t("hero.scroll")}
