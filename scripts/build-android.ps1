@@ -291,16 +291,34 @@ if ($gradleInfo.Kind -eq 'groovy') {
 }
 Log-Ok 'Gradle signing config ready.'
 
-Log-Step 'Building signed release APK (gradlew assembleRelease)...'
+Log-Step 'Building signed release APK + AAB (gradlew assembleRelease bundleRelease)...'
 Push-Location $AndroidDir
-& .\gradlew.bat assembleRelease
-Pop-Location
-
-if (Test-Path $ApkPath) {
-  Log-Ok ('Done! APK ready: ' + $ApkPath)
-  Write-Host ''
-  Write-Host 'Transfer this file to your Android phone and tap to install.' -ForegroundColor Cyan
-  Write-Host 'Important: Back up android\release-keystore.jks for future app updates.' -ForegroundColor Cyan
-} else {
-  Log-Fail 'Build finished but app-release.apk was not found.'
+try {
+  & .\gradlew.bat --no-daemon assembleRelease bundleRelease
+  $gradleExit = $LASTEXITCODE
+} finally {
+  Pop-Location
 }
+if ($gradleExit -ne 0) { Log-Fail ('Gradle build failed with exit code ' + $gradleExit) }
+
+New-Item -ItemType Directory -Force -Path $DistDir | Out-Null
+$producedApk = Test-Path $ApkPath
+$producedAab = Test-Path $AabPath
+
+if ($producedApk) {
+  Copy-Item $ApkPath (Join-Path $DistDir 'muscle-factory-release.apk') -Force
+  Log-Ok ('APK ready: ' + (Join-Path $DistDir 'muscle-factory-release.apk'))
+}
+if ($producedAab) {
+  Copy-Item $AabPath (Join-Path $DistDir 'muscle-factory-release.aab') -Force
+  Log-Ok ('AAB ready: ' + (Join-Path $DistDir 'muscle-factory-release.aab'))
+}
+
+if (-not $producedApk -and -not $producedAab) {
+  Log-Fail 'Build finished but neither APK nor AAB was found.'
+}
+
+Write-Host ''
+Write-Host 'APK  -> install directly on a phone (sideload).' -ForegroundColor Cyan
+Write-Host 'AAB  -> upload to Google Play Console.' -ForegroundColor Cyan
+Write-Host 'Important: Back up android\release-keystore.jks for future app updates.' -ForegroundColor Yellow
