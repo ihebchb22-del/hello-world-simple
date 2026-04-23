@@ -22,7 +22,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80" dir={dir}>
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 pt-[env(safe-area-inset-top)]" dir={dir}>
       {/* Top bar */}
       <div className="gradient-gold py-1.5 text-center">
         <p className="text-[10px] sm:text-xs font-semibold tracking-widest text-primary-foreground uppercase px-4">
