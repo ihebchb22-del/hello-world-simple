@@ -37,26 +37,29 @@ const Header = () => {
       </div>
 
       <div className="container flex items-center justify-between h-14 sm:h-16 md:h-20">
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 -ml-2 text-foreground touch-manipulation"
-          aria-label={t("aria.toggleMenu")}
-          aria-expanded={mobileOpen}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {mobileOpen ? (
-              <path d="M18 6L6 18M6 6l12 12" />
-            ) : (
-              <path d="M3 12h18M3 6h18M3 18h18" />
-            )}
-          </svg>
-        </button>
+        {/* Left cluster: menu + logo (tight on mobile) */}
+        <div className="flex items-center gap-1 md:gap-0">
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden p-2 -ml-2 text-foreground touch-manipulation"
+            aria-label={t("aria.toggleMenu")}
+            aria-expanded={mobileOpen}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              {mobileOpen ? (
+                <path d="M18 6L6 18M6 6l12 12" />
+              ) : (
+                <path d="M3 12h18M3 6h18M3 18h18" />
+              )}
+            </svg>
+          </button>
 
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2" aria-label="Muscle Factory - Accueil">
-          <img src="/images/logo.png" alt="Muscle Factory" className="h-7 sm:h-8 md:h-10 invert" width={120} height={40} />
-        </Link>
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2" aria-label="Muscle Factory - Accueil">
+            <img src="/images/logo.png" alt="Muscle Factory" className="h-7 sm:h-8 md:h-10 invert" width={120} height={40} />
+          </Link>
+        </div>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-8" aria-label={t("aria.mainNav")}>
