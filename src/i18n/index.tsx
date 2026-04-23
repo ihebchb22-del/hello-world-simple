@@ -1,4 +1,6 @@
 import { createContext, useContext, useState, useCallback, ReactNode, useEffect } from "react";
+import { Capacitor } from "@capacitor/core";
+import { Preferences } from "@capacitor/preferences";
 import { extraTranslations } from "./translations-extra";
 import { workoutTranslations } from "./translations-workouts";
 import { programDetailTranslations } from "./translations-program-detail";
@@ -242,41 +244,43 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
   });
 
   // 3) Native fallback hydration: on Android/iOS, also check Capacitor
-  //    Preferences (survives WebView cache clears, app reinstalls keep it).
+  //    Preferences (survives WebView cache clears better than localStorage alone).
   useEffect(() => {
     let cancelled = false;
-    (async () => {
+
+    const hydrateNativeLanguage = async () => {
       try {
-        const { Capacitor } = await import("@capacitor/core");
         if (!Capacitor.isNativePlatform()) return;
-        const { Preferences } = await import("@capacitor/preferences");
         const { value } = await Preferences.get({ key: "mf-lang" });
         if (cancelled) return;
+
         if (value && ["en", "fr", "ar"].includes(value) && value !== language) {
           setLanguageState(value as Language);
         } else if (!value) {
-          // First native launch — seed Preferences with current choice
           await Preferences.set({ key: "mf-lang", value: language });
         }
-      } catch { /* native plugin not available — fine, web only */ }
-    })();
-    return () => { cancelled = true; };
+      } catch {
+        /* ignore */
+      }
+    };
+
+    void hydrateNativeLanguage();
+    return () => {
+      cancelled = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
-    // Web persistence
     try { localStorage.setItem("mf-lang", lang); } catch { /* ignore */ }
-    // Native persistence (fire-and-forget)
-    (async () => {
-      try {
-        const { Capacitor } = await import("@capacitor/core");
-        if (!Capacitor.isNativePlatform()) return;
-        const { Preferences } = await import("@capacitor/preferences");
-        await Preferences.set({ key: "mf-lang", value: lang });
-      } catch { /* ignore */ }
-    })();
+
+    if (Capacitor.isNativePlatform()) {
+      void Preferences.set({ key: "mf-lang", value: lang }).catch(() => {
+        /* ignore */
+      });
+    }
+
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
     document.documentElement.lang = lang;
   }, []);
