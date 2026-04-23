@@ -17,6 +17,7 @@ import ProgramDetailPage from "./pages/ProgramDetailPage";
 import WishlistPage from "./pages/WishlistPage";
 import MyProgramsPage from "./pages/MyProgramsPage";
 import NotFound from "./pages/NotFound";
+import DiagPage from "./pages/DiagPage";
 import ScrollToTop from "./components/ScrollToTop";
 import MobileBottomNav from "./components/MobileBottomNav";
 
@@ -43,6 +44,7 @@ const App = () => (
                 <Route path="/workouts/:id" element={<ProgramDetailPage />} />
                 <Route path="/wishlist" element={<WishlistPage />} />
                 <Route path="/my-programs" element={<MyProgramsPage />} />
+                <Route path="/diag" element={<DiagPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <MobileBottomNav />
