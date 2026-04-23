@@ -126,21 +126,60 @@ function Generate-AndroidIcons {
   Log-Ok 'Android icons ready.'
 }
 
+function Find-Keytool {
+  $keytoolCmd = Get-Command keytool -ErrorAction SilentlyContinue
+  if ($keytoolCmd) { return $keytoolCmd.Source }
+  if ($env:JAVA_HOME) {
+    $candidate = Join-Path $env:JAVA_HOME 'bin\keytool.exe'
+    if (Test-Path $candidate) { return $candidate }
+  }
+  return $null
+}
+
+function Ensure-Jdk {
+  $keytoolPath = Find-Keytool
+  if ($keytoolPath) { return $keytoolPath }
+
+  Log-Step 'JDK not found. Attempting automatic install via winget (Microsoft.OpenJDK.21)...'
+  $winget = Get-Command winget -ErrorAction SilentlyContinue
+  if (-not $winget) {
+    Log-Fail 'winget is not available. Install JDK 21 manually from https://learn.microsoft.com/java/openjdk/download then re-run this script.'
+  }
+
+  & winget install --id Microsoft.OpenJDK.21 -e --accept-source-agreements --accept-package-agreements --silent
+  if ($LASTEXITCODE -ne 0) {
+    Log-Fail 'winget install failed. Install JDK 21 manually from https://learn.microsoft.com/java/openjdk/download then re-run this script.'
+  }
+
+  # Refresh PATH and JAVA_HOME from the registry without restarting PowerShell
+  $machinePath = [System.Environment]::GetEnvironmentVariable('Path', 'Machine')
+  $userPath    = [System.Environment]::GetEnvironmentVariable('Path', 'User')
+  $env:Path    = $machinePath + ';' + $userPath
+  $machineJavaHome = [System.Environment]::GetEnvironmentVariable('JAVA_HOME', 'Machine')
+  $userJavaHome    = [System.Environment]::GetEnvironmentVariable('JAVA_HOME', 'User')
+  if ($machineJavaHome) { $env:JAVA_HOME = $machineJavaHome }
+  elseif ($userJavaHome) { $env:JAVA_HOME = $userJavaHome }
+
+  if (-not $env:JAVA_HOME) {
+    $jdkRoot = 'C:\Program Files\Microsoft\jdk-21*'
+    $found = Get-ChildItem -Path $jdkRoot -Directory -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($found) {
+      $env:JAVA_HOME = $found.FullName
+      $env:Path = (Join-Path $env:JAVA_HOME 'bin') + ';' + $env:Path
+    }
+  }
+
+  $keytoolPath = Find-Keytool
+  if (-not $keytoolPath) {
+    Log-Fail 'JDK installed but keytool still not found. Close this window and open a new PowerShell, then re-run .\scripts\build-android.cmd'
+  }
+  Log-Ok ('JDK ready at ' + $env:JAVA_HOME)
+  return $keytoolPath
+}
+
 function Ensure-Keystore {
   if (-not (Test-Path $KeyStoreFile)) {
-    $keytoolCmd = Get-Command keytool -ErrorAction SilentlyContinue
-    $keytoolPath = $null
-
-    if ($keytoolCmd) {
-      $keytoolPath = $keytoolCmd.Source
-    } elseif ($env:JAVA_HOME) {
-      $candidate = Join-Path $env:JAVA_HOME 'bin\keytool.exe'
-      if (Test-Path $candidate) { $keytoolPath = $candidate }
-    }
-
-    if (-not $keytoolPath) {
-      Log-Fail 'keytool was not found. Install Android Studio/JDK and reopen PowerShell.'
-    }
+    $keytoolPath = Ensure-Jdk
 
     Log-Step 'Creating release keystore automatically...'
     & $keytoolPath -genkeypair -v -storetype PKCS12 -keystore $KeyStoreFile -storepass $StorePassword -keypass $KeyPassword -alias $KeyAlias -dname 'CN=Muscle Factory, OU=Mobile, O=Muscle Factory, L=Tunis, S=Tunis, C=TN' -keyalg RSA -keysize 2048 -validity 10000
