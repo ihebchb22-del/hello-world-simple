@@ -222,27 +222,61 @@ export const useI18n = () => useContext(I18nContext);
 
 export const I18nProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState<Language>(() => {
-    // 1) URL ?lang= takes priority (so Google hreflang URLs work)
+    // 1) URL ?lang= takes priority (so Google hreflang URLs work on web)
     if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const urlLang = params.get("lang") as Language | null;
-      if (urlLang && ["en", "fr", "ar"].includes(urlLang)) {
-        try {
-          localStorage.setItem("mf-lang", urlLang);
-        } catch {
-          /* ignore */
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const urlLang = params.get("lang") as Language | null;
+        if (urlLang && ["en", "fr", "ar"].includes(urlLang)) {
+          try { localStorage.setItem("mf-lang", urlLang); } catch { /* ignore */ }
+          return urlLang;
         }
-        return urlLang;
-      }
+      } catch { /* ignore */ }
     }
-    // 2) Saved preference
-    const saved = typeof window !== "undefined" ? localStorage.getItem("mf-lang") : null;
-    return (saved as Language) || "fr";
+    // 2) Saved preference (sync read from localStorage — works in WebView too)
+    try {
+      const saved = typeof window !== "undefined" ? localStorage.getItem("mf-lang") : null;
+      if (saved && ["en", "fr", "ar"].includes(saved)) return saved as Language;
+    } catch { /* ignore */ }
+    return "fr";
   });
+
+  // 3) Native fallback hydration: on Android/iOS, also check Capacitor
+  //    Preferences (survives WebView cache clears, app reinstalls keep it).
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { Capacitor } = await import("@capacitor/core");
+        if (!Capacitor.isNativePlatform()) return;
+        const { Preferences } = await import("@capacitor/preferences");
+        const { value } = await Preferences.get({ key: "mf-lang" });
+        if (cancelled) return;
+        if (value && ["en", "fr", "ar"].includes(value) && value !== language) {
+          setLanguageState(value as Language);
+        } else if (!value) {
+          // First native launch — seed Preferences with current choice
+          await Preferences.set({ key: "mf-lang", value: language });
+        }
+      } catch { /* native plugin not available — fine, web only */ }
+    })();
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem("mf-lang", lang);
+    // Web persistence
+    try { localStorage.setItem("mf-lang", lang); } catch { /* ignore */ }
+    // Native persistence (fire-and-forget)
+    (async () => {
+      try {
+        const { Capacitor } = await import("@capacitor/core");
+        if (!Capacitor.isNativePlatform()) return;
+        const { Preferences } = await import("@capacitor/preferences");
+        await Preferences.set({ key: "mf-lang", value: lang });
+      } catch { /* ignore */ }
+    })();
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
     document.documentElement.lang = lang;
   }, []);
