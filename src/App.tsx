@@ -46,7 +46,7 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <MobileBottomNav />
-            </BrowserRouter>
+            </HashRouter>
           </TooltipProvider>
         </ProgressProvider>
       </WishlistProvider>
