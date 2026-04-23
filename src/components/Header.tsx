@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useI18n } from "@/i18n";
+import { useI18n, Language } from "@/i18n";
 import { useWishlist } from "@/contexts/WishlistContext";
 import LanguageSwitcher from "./LanguageSwitcher";
 
@@ -8,8 +8,14 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
-  const { t, dir } = useI18n();
+  const { t, dir, language, setLanguage } = useI18n();
   const { count: wishlistCount } = useWishlist();
+
+  const langs: { code: Language; label: string; short: string }[] = [
+    { code: "en", label: "English", short: "EN" },
+    { code: "fr", label: "Français", short: "FR" },
+    { code: "ar", label: "العربية", short: "AR" },
+  ];
 
   const navLinks = [
     { label: t("nav.shop"), href: "/shop" },
@@ -71,7 +77,10 @@ const Header = () => {
 
         {/* Right actions */}
         <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
-          <LanguageSwitcher />
+          {/* Language switcher: desktop only — mobile uses the menu drawer */}
+          <div className="hidden md:block">
+            <LanguageSwitcher />
+          </div>
           <button
             onClick={() => setSearchOpen(!searchOpen)}
             className="p-2 text-foreground hover:text-primary transition-colors touch-manipulation"
@@ -142,6 +151,33 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
+
+            {/* Language section */}
+            <div className="mt-2 border-t border-border pt-3 pb-2">
+              <div className="px-6 pb-2 font-condensed text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+                {t("aria.language") || "Language"}
+              </div>
+              <div className="grid grid-cols-3 gap-2 px-4">
+                {langs.map((l) => {
+                  const active = language === l.code;
+                  return (
+                    <button
+                      key={l.code}
+                      onClick={() => { setLanguage(l.code); setMobileOpen(false); }}
+                      className={`flex flex-col items-center justify-center gap-1 py-2.5 rounded-md border transition-colors touch-manipulation ${
+                        active
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border bg-secondary/40 text-foreground hover:border-primary/50"
+                      }`}
+                      aria-pressed={active}
+                    >
+                      <span className="font-condensed text-xs font-bold tracking-wider">{l.short}</span>
+                      <span className="text-[10px] text-muted-foreground">{l.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </nav>
       )}
