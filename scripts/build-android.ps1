@@ -316,6 +316,8 @@ if ($gradleInfo.Kind -eq 'groovy') {
 }
 Log-Ok 'Gradle signing config ready.'
 
+Clear-GradleNativeCache
+
 Log-Step 'Building signed release APK + AAB (gradlew assembleRelease bundleRelease)...'
 Push-Location $AndroidDir
 try {
