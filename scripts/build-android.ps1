@@ -7,20 +7,21 @@ function Log-Fail($message) { Write-Host ('FAIL ' + $message) -ForegroundColor R
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
 
-$LogoPath         = Join-Path $Root 'public\images\logo.png'
-$AndroidDir       = Join-Path $Root 'android'
-$AndroidRes       = Join-Path $AndroidDir 'app\src\main\res'
-$GradleGroovyFile = Join-Path $AndroidDir 'app\build.gradle'
-$GradleKtsFile    = Join-Path $AndroidDir 'app\build.gradle.kts'
-$KeystoreProps    = Join-Path $AndroidDir 'keystore.properties'
-$KeyStoreFile     = Join-Path $AndroidDir 'release-keystore.jks'
-$ApkPath          = Join-Path $AndroidDir 'app\build\outputs\apk\release\app-release.apk'
-$AabPath          = Join-Path $AndroidDir 'app\build\outputs\bundle\release\app-release.aab'
-$DistDir          = Join-Path $Root 'dist-android'
-$BgColor          = '#0d0d0d'
-$KeyAlias         = 'musclefactory'
-$KeyPassword      = 'androidrelease'
-$StorePassword    = 'androidrelease'
+$LogoPath           = Join-Path $Root 'public\images\logo.png'
+$AndroidDir         = Join-Path $Root 'android'
+$AndroidRes         = Join-Path $AndroidDir 'app\src\main\res'
+$AndroidGradleProps = Join-Path $AndroidDir 'gradle.properties'
+$GradleGroovyFile   = Join-Path $AndroidDir 'app\build.gradle'
+$GradleKtsFile      = Join-Path $AndroidDir 'app\build.gradle.kts'
+$KeystoreProps      = Join-Path $AndroidDir 'keystore.properties'
+$KeyStoreFile       = Join-Path $AndroidDir 'release-keystore.jks'
+$ApkPath            = Join-Path $AndroidDir 'app\build\outputs\apk\release\app-release.apk'
+$AabPath            = Join-Path $AndroidDir 'app\build\outputs\bundle\release\app-release.aab'
+$DistDir            = Join-Path $Root 'dist-android'
+$BgColor            = '#0d0d0d'
+$KeyAlias           = 'musclefactory'
+$KeyPassword        = 'androidrelease'
+$StorePassword      = 'androidrelease'
 
 function Ensure-AndroidPlatform {
   if (-not (Test-Path $AndroidDir)) {
@@ -129,7 +130,6 @@ function Generate-AndroidIcons {
 }
 
 function Find-Jdk21Home {
-  # 1. Standard install paths for JDK 21 (Microsoft, Eclipse Temurin, Amazon Corretto, Zulu)
   $candidateRoots = @(
     'C:\Program Files\Microsoft\jdk-21*',
     'C:\Program Files\Eclipse Adoptium\jdk-21*',
@@ -143,7 +143,7 @@ function Find-Jdk21Home {
              Sort-Object Name -Descending | Select-Object -First 1
     if ($found) { return $found.FullName }
   }
-  # 2. Fall back to JAVA_HOME only if it actually points at a JDK 21
+
   if ($env:JAVA_HOME -and (Test-Path (Join-Path $env:JAVA_HOME 'bin\keytool.exe'))) {
     $releaseFile = Join-Path $env:JAVA_HOME 'release'
     if (Test-Path $releaseFile) {
@@ -151,6 +151,7 @@ function Find-Jdk21Home {
       if ($line -and $line.Line -match 'JAVA_VERSION="?21') { return $env:JAVA_HOME }
     }
   }
+
   return $null
 }
 
@@ -161,7 +162,6 @@ function Find-Keytool {
 }
 
 function Install-Jdk21Portable {
-  # Download Microsoft OpenJDK 21 ZIP and extract under LOCALAPPDATA. No admin / winget required.
   $arch = if ([Environment]::Is64BitOperatingSystem) { 'x64' } else { 'x86' }
   $zipUrl = "https://aka.ms/download-jdk/microsoft-jdk-21-windows-$arch.zip"
   $installRoot = Join-Path $env:LOCALAPPDATA 'MuscleFactory\jdk21'
@@ -177,7 +177,6 @@ function Install-Jdk21Portable {
   }
 
   Log-Step 'Extracting JDK 21...'
-  # Clean previous partial extracts
   Get-ChildItem -Path $installRoot -Directory -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
   Expand-Archive -Path $zipPath -DestinationPath $installRoot -Force
   Remove-Item $zipPath -Force -ErrorAction SilentlyContinue
@@ -195,7 +194,6 @@ function Install-Jdk21Portable {
 function Ensure-Jdk {
   $jdk21Home = Find-Jdk21Home
   if (-not $jdk21Home) {
-    # Also check our portable install location before downloading again
     $portableRoot = Join-Path $env:LOCALAPPDATA 'MuscleFactory\jdk21'
     if (Test-Path $portableRoot) {
       $existing = Get-ChildItem -Path $portableRoot -Directory -ErrorAction SilentlyContinue |
@@ -220,7 +218,6 @@ function Ensure-Jdk {
     }
   }
 
-  # Pin JAVA_HOME and PATH to JDK 21 for this process (overriding any newer JDK like 25)
   $env:JAVA_HOME = $jdk21Home
   $jdk21Bin = Join-Path $jdk21Home 'bin'
   $env:Path = $jdk21Bin + ';' + $env:Path
@@ -234,8 +231,6 @@ function Ensure-Jdk {
 }
 
 function Clear-GradleNativeCache {
-  # JDK upgrades can leave a broken gradle-fileevents.dll cached under ~/.gradle/native.
-  # Wipe it so Gradle re-extracts a working copy for the current JVM.
   $nativeDir = Join-Path $env:USERPROFILE '.gradle\native'
   if (Test-Path $nativeDir) {
     Log-Step 'Clearing stale Gradle native cache (~/.gradle/native)...'
@@ -267,6 +262,27 @@ function Get-GradleFile {
   if (Test-Path $GradleGroovyFile) { return @{ Path = $GradleGroovyFile; Kind = 'groovy' } }
   if (Test-Path $GradleKtsFile) { return @{ Path = $GradleKtsFile; Kind = 'kts' } }
   Log-Fail 'Could not find android app Gradle file.'
+}
+
+function Ensure-GradleWatchDisabled {
+  $desiredLine = 'org.gradle.vfs.watch=false'
+
+  if (Test-Path $AndroidGradleProps) {
+    $content = Get-Content -Path $AndroidGradleProps -Raw
+    if ($content -match '(?m)^\s*org\.gradle\.vfs\.watch\s*=') {
+      $content = [regex]::Replace($content, '(?m)^\s*org\.gradle\.vfs\.watch\s*=.*$', $desiredLine)
+    } else {
+      if ($content.Length -gt 0 -and -not $content.EndsWith("`r`n") -and -not $content.EndsWith("`n")) {
+        $content += "`r`n"
+      }
+      $content += $desiredLine + "`r`n"
+    }
+  } else {
+    $content = $desiredLine + "`r`n"
+  }
+
+  Set-Content -Path $AndroidGradleProps -Value $content -Encoding UTF8
+  Log-Ok 'Disabled Gradle file watching for this Android project.'
 }
 
 function Patch-GroovyGradle($path) {
@@ -356,13 +372,14 @@ if ($gradleInfo.Kind -eq 'groovy') {
 }
 Log-Ok 'Gradle signing config ready.'
 
+Ensure-GradleWatchDisabled
 Clear-GradleNativeCache
 
 Log-Step 'Building signed release APK + AAB (gradlew assembleRelease bundleRelease)...'
 $javaHomeForGradle = $env:JAVA_HOME
 Push-Location $AndroidDir
 try {
-  & .\gradlew.bat "-Dorg.gradle.java.home=$javaHomeForGradle" --no-daemon assembleRelease bundleRelease
+  & .\gradlew.bat "-Dorg.gradle.java.home=$javaHomeForGradle" '-Dorg.gradle.vfs.watch=false' '--no-watch-fs' '--no-daemon' 'assembleRelease' 'bundleRelease'
   $gradleExit = $LASTEXITCODE
 } finally {
   Pop-Location
