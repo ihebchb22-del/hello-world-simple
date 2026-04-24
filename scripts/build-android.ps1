@@ -319,9 +319,10 @@ Log-Ok 'Gradle signing config ready.'
 Clear-GradleNativeCache
 
 Log-Step 'Building signed release APK + AAB (gradlew assembleRelease bundleRelease)...'
+$javaHomeForGradle = $env:JAVA_HOME
 Push-Location $AndroidDir
 try {
-  & .\gradlew.bat --no-daemon assembleRelease bundleRelease
+  & .\gradlew.bat "-Dorg.gradle.java.home=$javaHomeForGradle" --no-daemon assembleRelease bundleRelease
   $gradleExit = $LASTEXITCODE
 } finally {
   Pop-Location
