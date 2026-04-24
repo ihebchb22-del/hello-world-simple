@@ -160,23 +160,63 @@ function Find-Keytool {
   return $null
 }
 
+function Install-Jdk21Portable {
+  # Download Microsoft OpenJDK 21 ZIP and extract under LOCALAPPDATA. No admin / winget required.
+  $arch = if ([Environment]::Is64BitOperatingSystem) { 'x64' } else { 'x86' }
+  $zipUrl = "https://aka.ms/download-jdk/microsoft-jdk-21-windows-$arch.zip"
+  $installRoot = Join-Path $env:LOCALAPPDATA 'MuscleFactory\jdk21'
+  $zipPath = Join-Path $env:TEMP 'microsoft-jdk-21.zip'
+
+  Log-Step ('Downloading Microsoft OpenJDK 21 from ' + $zipUrl + ' ...')
+  New-Item -ItemType Directory -Force -Path $installRoot | Out-Null
+  try {
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath -UseBasicParsing
+  } catch {
+    Log-Fail ('Failed to download JDK 21 zip: ' + $_.Exception.Message + '. Download it manually from https://learn.microsoft.com/java/openjdk/download and extract to ' + $installRoot)
+  }
+
+  Log-Step 'Extracting JDK 21...'
+  # Clean previous partial extracts
+  Get-ChildItem -Path $installRoot -Directory -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+  Expand-Archive -Path $zipPath -DestinationPath $installRoot -Force
+  Remove-Item $zipPath -Force -ErrorAction SilentlyContinue
+
+  $extracted = Get-ChildItem -Path $installRoot -Directory -ErrorAction SilentlyContinue |
+               Where-Object { Test-Path (Join-Path $_.FullName 'bin\keytool.exe') } |
+               Select-Object -First 1
+  if (-not $extracted) {
+    Log-Fail ('JDK 21 extraction did not yield a usable JDK under ' + $installRoot)
+  }
+  Log-Ok ('JDK 21 installed at ' + $extracted.FullName)
+  return $extracted.FullName
+}
+
 function Ensure-Jdk {
   $jdk21Home = Find-Jdk21Home
   if (-not $jdk21Home) {
-    Log-Step 'JDK 21 not found. Installing Microsoft.OpenJDK.21 via winget (Gradle is not compatible with JDK 25)...'
+    # Also check our portable install location before downloading again
+    $portableRoot = Join-Path $env:LOCALAPPDATA 'MuscleFactory\jdk21'
+    if (Test-Path $portableRoot) {
+      $existing = Get-ChildItem -Path $portableRoot -Directory -ErrorAction SilentlyContinue |
+                  Where-Object { Test-Path (Join-Path $_.FullName 'bin\keytool.exe') } |
+                  Select-Object -First 1
+      if ($existing) { $jdk21Home = $existing.FullName }
+    }
+  }
+
+  if (-not $jdk21Home) {
+    Log-Step 'JDK 21 not found. Trying winget first...'
     $winget = Get-Command winget -ErrorAction SilentlyContinue
-    if (-not $winget) {
-      Log-Fail 'winget is not available. Install JDK 21 manually from https://learn.microsoft.com/java/openjdk/download then re-run this script.'
+    if ($winget) {
+      & winget install --id Microsoft.OpenJDK.21 -e --accept-source-agreements --accept-package-agreements --silent
+      if ($LASTEXITCODE -eq 0 -or $LASTEXITCODE -eq -1978335189) {
+        $jdk21Home = Find-Jdk21Home
+      }
     }
-
-    & winget install --id Microsoft.OpenJDK.21 -e --accept-source-agreements --accept-package-agreements --silent
-    if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) {
-      Log-Fail 'winget install failed. Install JDK 21 manually from https://learn.microsoft.com/java/openjdk/download then re-run this script.'
-    }
-
-    $jdk21Home = Find-Jdk21Home
     if (-not $jdk21Home) {
-      Log-Fail 'JDK 21 installed but could not be located. Close this window, open a new PowerShell, then re-run .\scripts\build-android.cmd'
+      Log-Step 'Falling back to portable JDK 21 download (no admin / winget required)...'
+      $jdk21Home = Install-Jdk21Portable
     }
   }
 
