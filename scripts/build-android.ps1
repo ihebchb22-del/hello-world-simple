@@ -128,55 +128,80 @@ function Generate-AndroidIcons {
   Log-Ok 'Android icons ready.'
 }
 
-function Find-Keytool {
-  $keytoolCmd = Get-Command keytool -ErrorAction SilentlyContinue
-  if ($keytoolCmd) { return $keytoolCmd.Source }
-  if ($env:JAVA_HOME) {
-    $candidate = Join-Path $env:JAVA_HOME 'bin\keytool.exe'
-    if (Test-Path $candidate) { return $candidate }
+function Find-Jdk21Home {
+  # 1. Standard install paths for JDK 21 (Microsoft, Eclipse Temurin, Amazon Corretto, Zulu)
+  $candidateRoots = @(
+    'C:\Program Files\Microsoft\jdk-21*',
+    'C:\Program Files\Eclipse Adoptium\jdk-21*',
+    'C:\Program Files\Java\jdk-21*',
+    'C:\Program Files\Amazon Corretto\jdk21*',
+    'C:\Program Files\Zulu\zulu-21*'
+  )
+  foreach ($root in $candidateRoots) {
+    $found = Get-ChildItem -Path $root -Directory -ErrorAction SilentlyContinue |
+             Where-Object { Test-Path (Join-Path $_.FullName 'bin\keytool.exe') } |
+             Sort-Object Name -Descending | Select-Object -First 1
+    if ($found) { return $found.FullName }
+  }
+  # 2. Fall back to JAVA_HOME only if it actually points at a JDK 21
+  if ($env:JAVA_HOME -and (Test-Path (Join-Path $env:JAVA_HOME 'bin\keytool.exe'))) {
+    $releaseFile = Join-Path $env:JAVA_HOME 'release'
+    if (Test-Path $releaseFile) {
+      $line = Select-String -Path $releaseFile -Pattern '^JAVA_VERSION=' -ErrorAction SilentlyContinue | Select-Object -First 1
+      if ($line -and $line.Line -match 'JAVA_VERSION="?21') { return $env:JAVA_HOME }
+    }
   }
   return $null
 }
 
+function Find-Keytool {
+  $jdk21 = Find-Jdk21Home
+  if ($jdk21) { return (Join-Path $jdk21 'bin\keytool.exe') }
+  return $null
+}
+
 function Ensure-Jdk {
-  $keytoolPath = Find-Keytool
-  if ($keytoolPath) { return $keytoolPath }
+  $jdk21Home = Find-Jdk21Home
+  if (-not $jdk21Home) {
+    Log-Step 'JDK 21 not found. Installing Microsoft.OpenJDK.21 via winget (Gradle is not compatible with JDK 25)...'
+    $winget = Get-Command winget -ErrorAction SilentlyContinue
+    if (-not $winget) {
+      Log-Fail 'winget is not available. Install JDK 21 manually from https://learn.microsoft.com/java/openjdk/download then re-run this script.'
+    }
 
-  Log-Step 'JDK not found. Attempting automatic install via winget (Microsoft.OpenJDK.21)...'
-  $winget = Get-Command winget -ErrorAction SilentlyContinue
-  if (-not $winget) {
-    Log-Fail 'winget is not available. Install JDK 21 manually from https://learn.microsoft.com/java/openjdk/download then re-run this script.'
-  }
+    & winget install --id Microsoft.OpenJDK.21 -e --accept-source-agreements --accept-package-agreements --silent
+    if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) {
+      Log-Fail 'winget install failed. Install JDK 21 manually from https://learn.microsoft.com/java/openjdk/download then re-run this script.'
+    }
 
-  & winget install --id Microsoft.OpenJDK.21 -e --accept-source-agreements --accept-package-agreements --silent
-  if ($LASTEXITCODE -ne 0) {
-    Log-Fail 'winget install failed. Install JDK 21 manually from https://learn.microsoft.com/java/openjdk/download then re-run this script.'
-  }
-
-  # Refresh PATH and JAVA_HOME from the registry without restarting PowerShell
-  $machinePath = [System.Environment]::GetEnvironmentVariable('Path', 'Machine')
-  $userPath    = [System.Environment]::GetEnvironmentVariable('Path', 'User')
-  $env:Path    = $machinePath + ';' + $userPath
-  $machineJavaHome = [System.Environment]::GetEnvironmentVariable('JAVA_HOME', 'Machine')
-  $userJavaHome    = [System.Environment]::GetEnvironmentVariable('JAVA_HOME', 'User')
-  if ($machineJavaHome) { $env:JAVA_HOME = $machineJavaHome }
-  elseif ($userJavaHome) { $env:JAVA_HOME = $userJavaHome }
-
-  if (-not $env:JAVA_HOME) {
-    $jdkRoot = 'C:\Program Files\Microsoft\jdk-21*'
-    $found = Get-ChildItem -Path $jdkRoot -Directory -ErrorAction SilentlyContinue | Select-Object -First 1
-    if ($found) {
-      $env:JAVA_HOME = $found.FullName
-      $env:Path = (Join-Path $env:JAVA_HOME 'bin') + ';' + $env:Path
+    $jdk21Home = Find-Jdk21Home
+    if (-not $jdk21Home) {
+      Log-Fail 'JDK 21 installed but could not be located. Close this window, open a new PowerShell, then re-run .\scripts\build-android.cmd'
     }
   }
 
-  $keytoolPath = Find-Keytool
-  if (-not $keytoolPath) {
-    Log-Fail 'JDK installed but keytool still not found. Close this window and open a new PowerShell, then re-run .\scripts\build-android.cmd'
+  # Pin JAVA_HOME and PATH to JDK 21 for this process (overriding any newer JDK like 25)
+  $env:JAVA_HOME = $jdk21Home
+  $jdk21Bin = Join-Path $jdk21Home 'bin'
+  $env:Path = $jdk21Bin + ';' + $env:Path
+
+  $keytoolPath = Join-Path $jdk21Bin 'keytool.exe'
+  if (-not (Test-Path $keytoolPath)) {
+    Log-Fail ('keytool.exe not found in ' + $jdk21Bin)
   }
-  Log-Ok ('JDK ready at ' + $env:JAVA_HOME)
+  Log-Ok ('Using JDK 21 at ' + $env:JAVA_HOME)
   return $keytoolPath
+}
+
+function Clear-GradleNativeCache {
+  # JDK upgrades can leave a broken gradle-fileevents.dll cached under ~/.gradle/native.
+  # Wipe it so Gradle re-extracts a working copy for the current JVM.
+  $nativeDir = Join-Path $env:USERPROFILE '.gradle\native'
+  if (Test-Path $nativeDir) {
+    Log-Step 'Clearing stale Gradle native cache (~/.gradle/native)...'
+    Remove-Item -Recurse -Force $nativeDir -ErrorAction SilentlyContinue
+    Log-Ok 'Gradle native cache cleared.'
+  }
 }
 
 function Ensure-Keystore {
