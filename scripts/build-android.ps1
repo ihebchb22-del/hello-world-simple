@@ -11,6 +11,7 @@ $LogoPath           = Join-Path $Root 'public\images\logo.png'
 $AndroidDir         = Join-Path $Root 'android'
 $AndroidRes         = Join-Path $AndroidDir 'app\src\main\res'
 $AndroidGradleProps = Join-Path $AndroidDir 'gradle.properties'
+$GradleWrapperProps = Join-Path $AndroidDir 'gradle\wrapper\gradle-wrapper.properties'
 $GradleGroovyFile   = Join-Path $AndroidDir 'app\build.gradle'
 $GradleKtsFile      = Join-Path $AndroidDir 'app\build.gradle.kts'
 $KeystoreProps      = Join-Path $AndroidDir 'keystore.properties'
@@ -18,6 +19,8 @@ $KeyStoreFile       = Join-Path $AndroidDir 'release-keystore.jks'
 $ApkPath            = Join-Path $AndroidDir 'app\build\outputs\apk\release\app-release.apk'
 $AabPath            = Join-Path $AndroidDir 'app\build\outputs\bundle\release\app-release.aab'
 $DistDir            = Join-Path $Root 'dist-android'
+$ProjectGradleHome  = Join-Path $Root '.gradle-android-build'
+$GradleWrapperVersion = '8.11.1'
 $BgColor            = '#0d0d0d'
 $KeyAlias           = 'musclefactory'
 $KeyPassword        = 'androidrelease'
@@ -230,12 +233,48 @@ function Ensure-Jdk {
   return $keytoolPath
 }
 
-function Clear-GradleNativeCache {
-  $nativeDir = Join-Path $env:USERPROFILE '.gradle\native'
-  if (Test-Path $nativeDir) {
-    Log-Step 'Clearing stale Gradle native cache (~/.gradle/native)...'
-    Remove-Item -Recurse -Force $nativeDir -ErrorAction SilentlyContinue
-    Log-Ok 'Gradle native cache cleared.'
+function Ensure-GradleWrapperVersion {
+  if (-not (Test-Path $GradleWrapperProps)) {
+    Log-Fail 'Could not find android\gradle\wrapper\gradle-wrapper.properties'
+  }
+
+  $desiredUrl = 'distributionUrl=https\://services.gradle.org/distributions/gradle-' + $GradleWrapperVersion + '-all.zip'
+  $content = Get-Content -Path $GradleWrapperProps -Raw
+
+  if ($content -match '(?m)^distributionUrl=') {
+    $content = [regex]::Replace($content, '(?m)^distributionUrl=.*$', $desiredUrl)
+  } else {
+    if ($content.Length -gt 0 -and -not $content.EndsWith("`r`n") -and -not $content.EndsWith("`n")) {
+      $content += "`r`n"
+    }
+    $content += $desiredUrl + "`r`n"
+  }
+
+  Set-Content -Path $GradleWrapperProps -Value $content -Encoding UTF8
+  Log-Ok ('Pinned Gradle wrapper to ' + $GradleWrapperVersion)
+}
+
+function Prepare-GradleUserHome {
+  if (Test-Path $ProjectGradleHome) {
+    Remove-Item -Recurse -Force $ProjectGradleHome -ErrorAction SilentlyContinue
+  }
+  New-Item -ItemType Directory -Force -Path $ProjectGradleHome | Out-Null
+  $env:GRADLE_USER_HOME = $ProjectGradleHome
+  Log-Ok ('Using isolated Gradle user home at ' + $ProjectGradleHome)
+}
+
+function Clear-GradleNativeCaches {
+  $dirs = @(
+    (Join-Path $env:USERPROFILE '.gradle\native'),
+    (Join-Path $ProjectGradleHome 'native')
+  ) | Select-Object -Unique
+
+  foreach ($nativeDir in $dirs) {
+    if (Test-Path $nativeDir) {
+      Log-Step ('Clearing stale Gradle native cache (' + $nativeDir + ')...')
+      Remove-Item -Recurse -Force $nativeDir -ErrorAction SilentlyContinue
+      Log-Ok ('Gradle native cache cleared: ' + $nativeDir)
+    }
   }
 }
 
@@ -361,6 +400,8 @@ npx cap sync android
 Log-Ok 'Sync complete.'
 
 Ensure-Jdk | Out-Null
+Ensure-GradleWrapperVersion
+Prepare-GradleUserHome
 
 Ensure-Keystore
 
@@ -373,13 +414,13 @@ if ($gradleInfo.Kind -eq 'groovy') {
 Log-Ok 'Gradle signing config ready.'
 
 Ensure-GradleWatchDisabled
-Clear-GradleNativeCache
+Clear-GradleNativeCaches
 
 Log-Step 'Building signed release APK + AAB (gradlew assembleRelease bundleRelease)...'
 $javaHomeForGradle = $env:JAVA_HOME
 Push-Location $AndroidDir
 try {
-  & .\gradlew.bat "-Dorg.gradle.java.home=$javaHomeForGradle" '-Dorg.gradle.vfs.watch=false' '--no-watch-fs' '--no-daemon' 'assembleRelease' 'bundleRelease'
+  & .\gradlew.bat '--gradle-user-home' $ProjectGradleHome "-Dorg.gradle.java.home=$javaHomeForGradle" '-Dorg.gradle.vfs.watch=false' '--no-watch-fs' '--no-daemon' 'assembleRelease' 'bundleRelease'
   $gradleExit = $LASTEXITCODE
 } finally {
   Pop-Location
